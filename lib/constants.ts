@@ -1,0 +1,16 @@
+export const NETWORK = {
+  chainId: 97,
+  name: "BNB Testnet",
+  rpc: "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
+  explorer: "https://testnet.bscscan.com",
+};
+
+export const CONTRACTS = {
+  FSK: "0x784F97B0c8116727f8B6417b86975F77411e219B",
+  PRESALE: "0xdf48efcc73818301c045384df237d6e04cae9a9d",
+  COMMUNITY_REWARDS: "0xe29878f5bb58f9f3d999019bc0cabe40f8190794",
+  VESTING: "0xb344497626676de7ba35e0d89163c85b518b7cd3",
+  TREASURY: "0x9ca5f21455d132688058d286cb216e527e6b103d",
+  USDT: "0x02F1303F087C6D78f4142bC2dE8430348982D549",
+  WBNB: "0xae13d989dac2f0debff460ac112a837c89bBAa7cd",
+};
