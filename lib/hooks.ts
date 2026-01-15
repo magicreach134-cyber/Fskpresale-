@@ -1,17 +1,53 @@
 // lib/hooks.ts
-import { Contract, BrowserProvider, JsonRpcProvider } from "ethers";
-import { CONTRACTS } from "./constants";
+import { BrowserProvider, Contract } from "ethers";
+import { CONTRACTS, ABIS } from "./contracts";
 
-import PresaleABI from "@/abis/FSKTOKENPRESALE.json";
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
 
-const RPC = "https://data-seed-prebsc-1-s1.bnbchain.org:8545";
+/* ================= READ ================= */
+
+export function getReadProvider() {
+  return new BrowserProvider(window.ethereum);
+}
 
 export function getPresaleReadContract() {
-  const provider = new JsonRpcProvider(RPC);
-  return new Contract(CONTRACTS.PRESALE, PresaleABI, provider);
+  const provider = new BrowserProvider(window.ethereum);
+  return new Contract(
+    CONTRACTS.PRESALE,
+    ABIS.PRESALE,
+    provider
+  );
 }
+
+export function getRewardsReadContract() {
+  const provider = new BrowserProvider(window.ethereum);
+  return new Contract(
+    CONTRACTS.COMMUNITY_REWARDS,
+    ABIS.COMMUNITY_REWARDS,
+    provider
+  );
+}
+
+/* ================= WRITE ================= */
 
 export async function getPresaleWriteContract(provider: BrowserProvider) {
   const signer = await provider.getSigner();
-  return new Contract(CONTRACTS.PRESALE, PresaleABI, signer);
+  return new Contract(
+    CONTRACTS.PRESALE,
+    ABIS.PRESALE,
+    signer
+  );
+}
+
+export async function getRewardsWriteContract(provider: BrowserProvider) {
+  const signer = await provider.getSigner();
+  return new Contract(
+    CONTRACTS.COMMUNITY_REWARDS,
+    ABIS.COMMUNITY_REWARDS,
+    signer
+  );
 }
