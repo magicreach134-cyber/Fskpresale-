@@ -1,0 +1,33 @@
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--gold);
+}
+
+button {
+  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+  color: #000;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input {
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--text);
+}
