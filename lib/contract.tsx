@@ -1,9 +1,41 @@
-export const CONTRACTS = {
-  FSK: "0x784F97B0c8116727f8B6417b86975F77411e219B",
-  PRESALE: "0xdf48efcc73818301c045384df237d6e04cae9a9d",
-  COMMUNITY_REWARDS: "0xe29878f5bb58f9f3d999019bc0cabe40f8190794",
-  VESTING: "0xb344497626676de7ba35e0d89163c85b518b7cd3",
-  TREASURY: "0x9ca5f21455d132688058d286cb216e527e6b103d",
-  USDT: "0x02F1303F087C6D78f4142bC2dE8430348982D549",
-  WBNB: "0xae13d989dac2f0debff460ac112a837c89bBAa7cd",
-};
+import { BrowserProvider, Contract } from "ethers";
+import PRESALE_ABI from "@/abi/FSKTokenPresale.json";
+import REWARDS_ABI from "@/abi/FSKCommunityRewards.json";
+import VESTING_ABI from "@/abi/FSKVesting.json";
+import ERC20_ABI from "@/abi/ERC20.json";
+import { CONTRACTS } from "@/lib/constants";
+
+export function getReadProvider() {
+  return new BrowserProvider(window.ethereum);
+}
+
+export async function getWriteSigner() {
+  const provider = new BrowserProvider(window.ethereum);
+  return provider.getSigner();
+}
+
+// Presale
+export function presaleRead() {
+  return new Contract(CONTRACTS.PRESALE, PRESALE_ABI, getReadProvider());
+}
+export async function presaleWrite() {
+  return new Contract(CONTRACTS.PRESALE, PRESALE_ABI, await getWriteSigner());
+}
+
+// Rewards
+export function rewardsRead() {
+  return new Contract(CONTRACTS.COMMUNITY_REWARDS, REWARDS_ABI, getReadProvider());
+}
+export async function rewardsWrite() {
+  return new Contract(CONTRACTS.COMMUNITY_REWARDS, REWARDS_ABI, await getWriteSigner());
+}
+
+// Vesting
+export function vestingRead() {
+  return new Contract(CONTRACTS.VESTING, VESTING_ABI, getReadProvider());
+}
+
+// ERC20
+export function erc20Read(address: string) {
+  return new Contract(address, ERC20_ABI, getReadProvider());
+}
